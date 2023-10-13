@@ -3,8 +3,9 @@ import { toast } from 'react-hot-toast'
 import { useTodo } from '../context'
 import { Input } from './Input'
 
-export const AddTodo = () => {
+export const AddTodo: React.FC = () => {
   const [input, setInput] = useState<string>('')
+  const [todos, setTodos] = useState<string[]>([])
   const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
@@ -15,7 +16,10 @@ export const AddTodo = () => {
 
   const handleSubmission = (e: React.FormEvent) => {
     e.preventDefault()
-    console.log('form has been submitted')
+    if (input.trim() !== ''){
+      setTodos([...todos, input])
+      setInput('')
+    }
   }
   
   return (
