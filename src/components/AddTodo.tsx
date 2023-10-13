@@ -5,8 +5,9 @@ import { Input } from './Input'
 
 export const AddTodo: React.FC = () => {
   const [input, setInput] = useState<string>('')
-  const [todos, setTodos] = useState<string[]>([])
+  // const [todos, setTodos] = useState<string[]>([])
   const inputRef = useRef<HTMLInputElement>(null)
+  const {addTodo} = useTodo()
 
   useEffect(() => {
     if(inputRef.current){
@@ -17,8 +18,12 @@ export const AddTodo: React.FC = () => {
   const handleSubmission = (e: React.FormEvent) => {
     e.preventDefault()
     if (input.trim() !== ''){
-      setTodos([...todos, input])
+      // setTodos([...todos, input])
+      addTodo(input)
       setInput('')
+      toast.success('Todo added successfully!')
+    } else {
+      toast.error('Todo field cannot be empty!')
     }
   }
   
